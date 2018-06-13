@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LojaVirtualModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Produtos">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="150" />
+          <Property Name="Estoque" Type="int" />
+        </EntityType>
+        <Function Name="spDeleteProduto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertProduto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo" Type="int" Mode="In" />
+          <Parameter Name="Descricao" Type="varchar" Mode="In" />
+          <Parameter Name="Estoque" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelectProduto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUpdateProduto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo" Type="int" Mode="In" />
+          <Parameter Name="Descricao" Type="varchar" Mode="In" />
+          <Parameter Name="Estoque" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="LojaVirtualModelStoreContainer">
+          <EntitySet Name="Produtos" EntityType="Self.Produtos" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LojaVirtualModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Estoque" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="LojaVirtualEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Produtos" EntityType="Self.Produto" />
+          <FunctionImport Name="spDeleteProduto" EntitySet="Produtos" ReturnType="Collection(LojaVirtualModel.Produto)">
+            <Parameter Name="Codigo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertProduto" EntitySet="Produtos" ReturnType="Collection(LojaVirtualModel.Produto)">
+            <Parameter Name="Codigo" Mode="In" Type="Int32" />
+            <Parameter Name="Descricao" Mode="In" Type="String" />
+            <Parameter Name="Estoque" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelectProduto" EntitySet="Produtos" ReturnType="Collection(LojaVirtualModel.Produto)" />
+          <FunctionImport Name="spUpdateProduto" EntitySet="Produtos" ReturnType="Collection(LojaVirtualModel.Produto)">
+            <Parameter Name="Codigo" Mode="In" Type="Int32" />
+            <Parameter Name="Descricao" Mode="In" Type="String" />
+            <Parameter Name="Estoque" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spSelectProduto_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="Descricao" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Estoque" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LojaVirtualModelStoreContainer" CdmEntityContainer="LojaVirtualEntities">
+          <EntitySetMapping Name="Produtos">
+            <EntityTypeMapping TypeName="LojaVirtualModel.Produto">
+              <MappingFragment StoreEntitySet="Produtos">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Estoque" ColumnName="Estoque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spDeleteProduto" FunctionName="LojaVirtualModel.Store.spDeleteProduto" />
+          <FunctionImportMapping FunctionImportName="spInsertProduto" FunctionName="LojaVirtualModel.Store.spInsertProduto" />
+          <FunctionImportMapping FunctionImportName="spSelectProduto" FunctionName="LojaVirtualModel.Store.spSelectProduto">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spUpdateProduto" FunctionName="LojaVirtualModel.Store.spUpdateProduto" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
