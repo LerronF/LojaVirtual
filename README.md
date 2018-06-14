@@ -5,7 +5,7 @@ Acima está criado o projeto "Loja", uma ideia de uma Loja Virtual Fictícia com
 O cadastro de produtos é básico, possui apenas a descrição e estoque.
 Nesse cadastro tem o CRUD padrão, e adicionei algumas bibliotecas como por exemplo o "AlertifyJS", para notificar cada operação do CRUD, e foi criado com base no "Entity Framework".
 
-Para rodar a aplicação, basta fazer download do projeto "Loja", e criar o banco e a tabela conforme abaixo:
+Para rodar a aplicação, basta fazer download do projeto "Loja", e criar o banco e a tabela conforme abaixo, ou abra o arquivo DBScript:
 
 ############################################################################################
 USE [LojaVirtual]
