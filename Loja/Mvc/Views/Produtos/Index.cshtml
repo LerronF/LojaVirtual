@@ -10,27 +10,23 @@
     <a href="@Url.Action("AddOrEdit","Produtos")" class="btn btn-default"><i class="fa fa-plus"></i>Create New</a>
 </p>
 <table class="table table-striped">
-    <thead class="table-heading">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estoque)
-            </th>
-            <th>Actions </th>
-        </tr>
+    <thead class="table-hover">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estoque)
+        </th>
+        <th>Actions </th>
+    </tr>
     </thead>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
@@ -38,11 +34,26 @@
                 @Html.DisplayFor(modelItem => item.Estoque)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |
-                @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
-                @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})
+                <a href ="@Url.Action("AddOrEdit","Produtos", new {id = item.Codigo})" class="btn btn-default"><i class="fa fa-pencil"></i> Editar</a>
+                <a onclick="Delete(@item.Codigo)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
             </td>
         </tr>
     }
 
 </table>
+
+@section scripts{
+    <script>
+        $(function() {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Loja Virtual', 'Deseja excluir este produto?', function(){
+                    windows.location.href = '@Url.Action("Delete","Produtos")/'+id;
+                },null);
+        }
+    </script>
+}
