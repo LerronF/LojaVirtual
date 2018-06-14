@@ -7,7 +7,7 @@ Nesse cadastro tem o CRUD padrão, e adicionei algumas bibliotecas como por exem
 
 Para rodar a aplicação, basta fazer download do projeto "Loja", e criar o banco e a tabela conforme abaixo:
 
-#########################################################################################################################################
+############################################################################################
 USE [LojaVirtual]
 GO
 
@@ -28,7 +28,7 @@ CREATE TABLE [dbo].[Produtos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-#########################################################################################################################################
+############################################################################################
 
 E quanto as operações do cadastro são bem intuitivas e simples.
 
