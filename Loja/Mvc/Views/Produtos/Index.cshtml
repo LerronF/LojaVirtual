@@ -7,7 +7,7 @@
 <br/>
 
 <p>
-    <a href="@Url.Action("AddOrEdit","Produtos")" class="btn btn-default"><i class="fa fa-plus"></i>Create New</a>
+    <a href="@Url.Action("AddOrEdit","Produtos")" class="btn btn-default"><i class="fa fa-plus"></i> Incluir Produto</a>
 </p>
 <table class="table table-striped">
     <thead class="table-hover">
@@ -52,7 +52,7 @@
 
         function Delete(id) {
             alertify.confirm('Loja Virtual', 'Deseja excluir este produto?', function(){
-                    windows.location.href = '@Url.Action("Delete","Produtos")/'+id;
+                    window.location.href = '@Url.Action("Delete","Produtos")/'+id;
                 },null);
         }
     </script>
