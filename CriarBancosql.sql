@@ -164,7 +164,7 @@ SELECT  Top 10 COUNT(VI.PRODUTO) VENDAS,
 FROM VENDAS V
 INNER JOIN VENDASITENS  VI ON VI.PEDIDO = V.ID
 INNER JOIN PRODUTOS P ON P.ID = VI.PRODUTO
-WHERE YEAR(V.DATA) = 2020
+WHERE YEAR(V.DATA) = 2021
 GROUP BY VI.PRODUTO,
          P.DESCRICAO
 ORDER BY Vendas
@@ -195,7 +195,7 @@ Select T.Nome From(SELECT  Top 3 Sum(Vi.ValUnit) VENDAS,
 FROM VENDAS V
 Inner join VendasItens Vi on Vi.Pedido = V.Id
 Inner join Clientes C on C.Id = V.CodCli
-WHERE V.Data between '01/04/2020' and '30/06/2020'
+WHERE V.Data between '2021-04-01' and '2021-08-30'
 Group By C.Nome)T
 
 
@@ -211,7 +211,7 @@ SELECT        TOP (2) SUM(Vi.ValUnit) AS VENDAS, C.Nome
 FROM            dbo.Vendas AS V INNER JOIN
                          dbo.VendasItens AS Vi ON Vi.Pedido = V.Id INNER JOIN
                          dbo.Clientes AS C ON C.Id = V.CodCli
-WHERE        V.Data between '01/04/2020' and '30/06/2020'
+WHERE        V.Data between '2021-04-01' and '2021-08-30'
 GROUP BY C.Nome
 GO
 /****** Object:  Table [dbo].[Estoque]    Script Date: 03/08/2021 14:50:41 ******/
