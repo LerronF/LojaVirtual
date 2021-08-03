@@ -7,8 +7,7 @@
 <h2>Tela de Vendas</h2>
 
 <p>
-    @*@Html.ActionLink("Criar", "Create")*@
-    <a asp-action="Criar" href="Create" class="btn btn-primary float-right"><i class="fal fa-plus-circle"></i>&nbsp;&nbsp;Adicionar</a>
+    @Html.ActionLink("Adicionar", "Create","Vendas",null,new { @class = "btn btn-primary btn-lg" })
 </p>
 <div class="form-group mb-0">
     <div class="table-responsive">
@@ -43,12 +42,9 @@
                             @Html.DisplayFor(modelItem => item.Total)
                         </td>
                         <td>
-                            @*@Html.ActionLink("Editar", "Edit", new { id = item.ID }) |*@
-                            <a asp-action="Criar"  href="Edit\@item.ID"  class="btn btn-success btn-sm"><i class="fal fa-plus-circle"></i>&nbsp;&nbsp;Editar</a>
-                            <a asp-action="Detalhes"  href="Details\@item.ID"  class="btn btn-primary float-right btn-sm"><i class="fal fa-plus-circle"></i>&nbsp;&nbsp;Visualizar</a>
-                            <a asp-action="Deletar"  href="Delete\@item.ID"  class="btn btn-danger float-right btn-sm"><i class="fal fa-plus-circle"></i>&nbsp;&nbsp;Excluir</a>
-                            @*@Html.ActionLink("Detalhes", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Deletar", "Delete", new { id = item.ID })*@
+                            @Html.ActionLink("Editar", "Edit", "Vendas", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
+                            @Html.ActionLink("Detalhes", "Details", "Vendas", new { id = item.ID }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Deletar", "Delete", "Vendas", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" }) 
                         </td>
                     </tr>
                 }

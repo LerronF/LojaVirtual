@@ -4,18 +4,49 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Preencha as Informações</h2>
+<h2>Tela de Venda</h2>
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Raimundo",
+        Value = "Raimundo"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Lerron",
+        Value = "Lerron",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Carlos",
+        Value = "Carlos"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Marcelo",
+        Value = "Marcelo"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Eudes",
+        Value = "Eudes"
+    });
+}
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+
     <div class="form-horizontal">
         <h4>Pedido</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div hidden class="form-group">
             @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
@@ -23,10 +54,10 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div hidden class="form-group">
             @Html.LabelFor(model => model.CodCli, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CodCli, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CodCli, new { htmlAttributes = new { @class = "form-control", @value = "1" } })
                 @Html.ValidationMessageFor(model => model.CodCli, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,11 +65,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Cliente, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Cliente, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Cliente, listItems, "-- Select Status --")
+               
                 @Html.ValidationMessageFor(model => model.Cliente, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div hidden class="form-group">
             @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
@@ -48,7 +80,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <a href="#" onclick="SalvarPedido();" class="btn btn-default"> Salvar Pedido</a>
+                <a href="#" onclick="SalvarPedido();" class="btn btn-success float-right"><i class="fal fa-plus-circle"></i>&nbsp;&nbsp;Adicionar</a>
+                @*<a href="#" onclick="SalvarPedido();" class="btn btn-success"> Salvar Pedido</a>*@
             </div>
         </div>
     </div>
@@ -56,13 +89,13 @@
     <div id="divItens" style="display:none;"></div>
 }
 
-    <div>
-        @Html.ActionLink("Volta", "Index")
-    </div>
+<div>
+    @Html.ActionLink("Finalizar Venda", "Index")
+</div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Scripts/Pedido.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/Pedido.js"></script>
 
 

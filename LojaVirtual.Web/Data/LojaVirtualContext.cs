@@ -13,6 +13,7 @@ namespace LojaVirtual.Web.Data
         public DbSet<Vendas> Vendas { get; set; }
         public DbSet<VendasItens> VendasItens { get; set; }
         public DbSet<Produtos> Produto { get; set; }
+        public DbSet<Clientes> Clientes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

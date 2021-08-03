@@ -1,40 +1,54 @@
 ﻿@model IEnumerable<LojaVirtual.Web.Models.VendasItens>
 
+
 <div class="form-horizontal">
     <h4>Itens</h4>
     <hr />
     <div class="form-group">
-        <label class="control-label col-md-2">Quantidade</label>
-        <div class="col-md-10">
-            <input type="text" id="QuantProd" name="QuantProd" />
-        </div>
-    </div>
-    <div class="form-group">
         <label class="control-label col-md-2">Produto</label>
         <div class="col-md-10">
-            <input type="text" id="Produto" name="Produto" />
+            <select class="form-select" aria-label="Default select example" id="Produto" name="Produto">
+                <option selected>Selecione um produto</option>
+                <option value="1">Arroz</option>
+                <option value="2">Macarrão</option>
+                <option value="3">Feijão</option>
+                <option value="4">Farinha</option>
+                <option value="5">Limão</option>
+                <option value="6">Melão</option>
+                <option value="7">Produto Teste</option>
+                <option value="8">Farinha Seca</option>
+                <option value="9">Tomilho</option>
+                <option value="10">Laranja</option>
+            </select>
+            @*<input type="text" id="Produto" name="Produto" />*@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2">Valor Unitário</label>
+        <label class="control-label col-md-2">Quantidade</label>
+        <div class="col-md-10">
+            <input type="number" id="QuantProd" name="QuantProd" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Valor Total</label>
         <div class="col-md-10">
             <input type="text" id="ValUnit" name="ValUnit" />
         </div>
     </div>
-    <div class="form-group">     
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-           <a href="#" onclick="SalvarItens();">Gravar Itens</a>
+            <a href="#" onclick="SalvarItens();">Gravar Itens</a>
         </div>
     </div>
 </div>
 
-<input type="hidden" id="Pedido" value="@ViewBag.Pedido"/>
+<input type="hidden" id="Pedido" value="@ViewBag.Pedido" />
 
-<table class="table">
+<table class="table table-striped table-bordered table-hover m-0">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Pedido)
-        </th>      
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Produto)
         </th>
@@ -44,31 +58,32 @@
         <th>
             @Html.DisplayNameFor(model => model.ValUnit)
         </th>
-       
-        <th></th>
+
+        @*<th></th>*@
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pedido)
-            </td>           
-            <td>
-                @Html.DisplayFor(modelItem => item.Produto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantProd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValUnit)
-            </td>            
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantProd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValUnit)
+                </td>
+                <!--<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })-->
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })*@
+                    <!--@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>-->
+            </tr>
+        }
+    </tbody>
 </table>
