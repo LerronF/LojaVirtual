@@ -77,7 +77,7 @@ namespace LojaVirtual.Web.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = @"SELECT V.Id, V.Data,V.Cliente, Sum(VI.ValUnit) as Total,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd " +
+                    cmd.CommandText = @"SELECT V.Id, V.Data,V.Cliente, (select Sum(Vit.ValUnit) as Total from Vendas Ve inner join VendasItens Vit on Vit.Pedido = Ve.Id Where Ve.Id = V.Id) as Total,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd " +
                                        "FROM Vendas V  " +
                                        "inner join VendasItens VI ON V.Id = VI.Pedido " +
                                        "inner join Produtos P on P.Id = VI.Produto " +
