@@ -230,11 +230,11 @@ CREATE TABLE [dbo].[Estoque](
 GO
 SET IDENTITY_INSERT [dbo].[Clientes] ON 
 
-INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (1, N'Raimundo Nonato')
-INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (2, N'Eudes Gomes')
-INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (3, N'Kelly Oliveira')
-INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (4, N'Francisco Silva')
-INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (5, N'Gilberto Honorato')
+INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (1, N'Raimundo')
+INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (2, N'Lerron')
+INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (3, N'Carlos')
+INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (4, N'Marcelo')
+INSERT [dbo].[Clientes] ([Id], [Nome]) VALUES (5, N'Eudes')
 SET IDENTITY_INSERT [dbo].[Clientes] OFF
 GO
 INSERT [dbo].[Estoque] ([IdProduto], [Quant]) VALUES (1, CAST(10.000 AS Decimal(18, 3)))
@@ -247,11 +247,11 @@ GO
 SET IDENTITY_INSERT [dbo].[Produtos] ON 
 
 INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (1, N'Arroz', CAST(23.000 AS Decimal(18, 3)), CAST(55.000 AS Decimal(18, 3)))
-INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (2, N'Macarr„o', CAST(12.000 AS Decimal(18, 3)), CAST(45.000 AS Decimal(18, 3)))
-INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (3, N'Feij„o', CAST(10.000 AS Decimal(18, 3)), CAST(56.000 AS Decimal(18, 3)))
+INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (2, N'Macarr√£o', CAST(12.000 AS Decimal(18, 3)), CAST(45.000 AS Decimal(18, 3)))
+INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (3, N'Feij√£o', CAST(10.000 AS Decimal(18, 3)), CAST(56.000 AS Decimal(18, 3)))
 INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (4, N'Farinha', CAST(12.000 AS Decimal(18, 3)), CAST(3.000 AS Decimal(18, 3)))
-INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (5, N'Lim„o', CAST(13.000 AS Decimal(18, 3)), CAST(2.000 AS Decimal(18, 3)))
-INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (6, N'Mel„o', CAST(12.000 AS Decimal(18, 3)), CAST(5.000 AS Decimal(18, 3)))
+INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (5, N'Lim√£o', CAST(13.000 AS Decimal(18, 3)), CAST(2.000 AS Decimal(18, 3)))
+INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (6, N'Mel√£o', CAST(12.000 AS Decimal(18, 3)), CAST(5.000 AS Decimal(18, 3)))
 INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (7, N'Produto Teste', CAST(12.000 AS Decimal(18, 3)), CAST(12.000 AS Decimal(18, 3)))
 INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (8, N'Farinha Seca', CAST(2.000 AS Decimal(18, 3)), CAST(9.000 AS Decimal(18, 3)))
 INSERT [dbo].[Produtos] ([Id], [Descricao], [Quantidade], [Valor]) VALUES (9, N'Tomilho', CAST(14.000 AS Decimal(18, 3)), CAST(5.000 AS Decimal(18, 3)))
@@ -260,30 +260,20 @@ SET IDENTITY_INSERT [dbo].[Produtos] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Vendas] ON 
 
-INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (34, 1, CAST(N'2020-06-16T00:00:00.000' AS DateTime), CAST(0 AS Decimal(18, 0)), N'Consumidor')
-INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (35, 3, CAST(N'2020-04-10T00:00:00.000' AS DateTime), CAST(50 AS Decimal(18, 0)), N'Kelly Oliveira')
-INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (36, 3, CAST(N'2020-05-15T00:00:00.000' AS DateTime), CAST(60 AS Decimal(18, 0)), N'Kelly Oliveira')
-INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (37, 2, CAST(N'2020-06-10T00:00:00.000' AS DateTime), CAST(100 AS Decimal(18, 0)), N'Eudes Andrade')
-INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (38, 2, CAST(N'2020-04-15T00:00:00.000' AS DateTime), CAST(50 AS Decimal(18, 0)), N'Eudes Anfrade')
+INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (57, 1, CAST(N'2020-06-16T00:00:00.000' AS DateTime), CAST(56 AS Decimal(18, 0)), N'Carlos')
+INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (58, 1, CAST(N'2020-04-10T00:00:00.000' AS DateTime), CAST(50 AS Decimal(18, 0)), N'Marcelo')
+INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (62, 1, CAST(N'2020-05-15T00:00:00.000' AS DateTime), CAST(60 AS Decimal(18, 0)), N'Lerron')
+INSERT [dbo].[Vendas] ([Id], [CodCli], [Data], [Total], [Cliente]) VALUES (76, 1, CAST(N'2020-06-10T00:00:00.000' AS DateTime), CAST(100 AS Decimal(18, 0)), N'Eudes')
 SET IDENTITY_INSERT [dbo].[Vendas] OFF
 GO
 SET IDENTITY_INSERT [dbo].[VendasItens] ON 
 
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 1, CAST(55 AS Decimal(18, 0)), 2, 1)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 10, CAST(33 AS Decimal(18, 0)), 3, 2)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 10, CAST(33 AS Decimal(18, 0)), 2, 3)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 1, CAST(55 AS Decimal(18, 0)), 1, 4)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 2, CAST(45 AS Decimal(18, 0)), 1, 5)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 2, CAST(56 AS Decimal(18, 0)), 1, 6)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 8, CAST(9 AS Decimal(18, 0)), 1, 7)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 10, CAST(33 AS Decimal(18, 0)), 1, 8)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 10, CAST(33 AS Decimal(18, 0)), 1, 9)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (34, 1, CAST(55 AS Decimal(18, 0)), 1, 10)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (35, 3, CAST(56 AS Decimal(18, 0)), 2, 11)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (36, 3, CAST(56 AS Decimal(18, 0)), 3, 12)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (36, 4, CAST(3 AS Decimal(18, 0)), 2, 13)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (37, 2, CAST(45 AS Decimal(18, 0)), 2, 14)
-INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (38, 4, CAST(60 AS Decimal(18, 0)), 2, 15)
+INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (57, 2, CAST(55 AS Decimal(18, 0)), 23, 21)
+INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (58, 3, CAST(33 AS Decimal(18, 0)), 3, 22)
+INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (62, 6, CAST(35 AS Decimal(18, 0)), 2, 26)
+INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (62, 1, CAST(51 AS Decimal(18, 0)), 13, 27)
+INSERT [dbo].[VendasItens] ([Pedido], [Produto], [ValUnit], [QuantProd], [Id]) VALUES (76, 8, CAST(45 AS Decimal(18, 0)), 14, 33)
+
 SET IDENTITY_INSERT [dbo].[VendasItens] OFF
 GO
 ALTER TABLE [dbo].[Estoque]  WITH CHECK ADD  CONSTRAINT [FK_Estoque_Produtos] FOREIGN KEY([IdProduto])
