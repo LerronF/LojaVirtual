@@ -315,9 +315,6 @@ namespace LojaVirtual.Web.Controllers
                     }
                 }
             }
-
-
-
             return RedirectToAction("Index");
         }
 
