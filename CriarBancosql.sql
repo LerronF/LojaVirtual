@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [BDTransire]    Script Date: 26/10/2020 10:50:41 ******/
+/****** Object:  Database [BDTransire]    Script Date: 03/08/2021 14:50:41 ******/
 CREATE DATABASE [BDTransire]
  CONTAINMENT = NONE  
 GO
@@ -102,7 +102,7 @@ GO
 
 USE [BDTransire]
 GO
-/****** Object:  Table [dbo].[Produtos]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  Table [dbo].[Produtos]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +118,7 @@ CREATE TABLE [dbo].[Produtos](
 )
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[VendasItens]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  Table [dbo].[VendasItens]   Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +135,7 @@ CREATE TABLE [dbo].[VendasItens](
 )
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Vendas]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  Table [dbo].[Vendas]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,7 +152,7 @@ CREATE TABLE [dbo].[Vendas](
 )
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[ContProdVend]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  View [dbo].[ContProdVend]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -170,7 +170,7 @@ GROUP BY VI.PRODUTO,
 ORDER BY Vendas
  
 GO
-/****** Object:  Table [dbo].[Clientes]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  Table [dbo].[Clientes]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,7 +184,7 @@ CREATE TABLE [dbo].[Clientes](
 )
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[Vendas3MaioresClienteNome]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  View [dbo].[Vendas3MaioresClienteNome]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -201,7 +201,7 @@ Group By C.Nome)T
 
  
 GO
-/****** Object:  View [dbo].[Vendas2MaioresClienteValor]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  View [dbo].[Vendas2MaioresClienteValor]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -214,7 +214,7 @@ FROM            dbo.Vendas AS V INNER JOIN
 WHERE        V.Data between '01/04/2020' and '30/06/2020'
 GROUP BY C.Nome
 GO
-/****** Object:  Table [dbo].[Estoque]    Script Date: 26/10/2020 10:10:55 ******/
+/****** Object:  Table [dbo].[Estoque]    Script Date: 03/08/2021 14:50:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
