@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Tela de Vendas</h2>
+<h2>Resumo de Vendas</h2>
 
 <p>
     @Html.ActionLink("Adicionar", "Create","Vendas",null,new { @class = "btn btn-primary btn-lg" })
@@ -15,9 +15,11 @@
             <thead class="thead-themed">
                 <tr>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.Data)
+                        Cód. Venda
                     </th>
-                    
+                    <th class="text-center">
+                        Data e hora da Venda
+                    </th>
                     <th class="text-center">
 
                         @Html.DisplayNameFor(model => model.Cliente)
@@ -31,22 +33,25 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cliente)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Total)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", "Vendas", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
-                            @Html.ActionLink("Detalhes", "Details", "Vendas", new { id = item.ID }, new { @class = "btn btn-warning btn-sm" })
-                            @Html.ActionLink("Deletar", "Delete", "Vendas", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" }) 
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Cliente)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td class="text-center">
+                        @*@Html.ActionLink("Editar", "Edit", "Vendas", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })*@
+                        @Html.ActionLink("Detalhes", "Details", "Vendas", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
+                        @Html.ActionLink("Deletar", "Delete", "Vendas", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

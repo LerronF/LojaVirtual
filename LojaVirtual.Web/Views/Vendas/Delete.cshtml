@@ -1,4 +1,4 @@
-﻿@model LojaVirtual.Web.Models.Vendas
+﻿@model IList<LojaVirtual.Web.Models.Vendas>
 
 @{
     ViewBag.Title = "Delete";
@@ -6,38 +6,78 @@
 
 <h2>Delete</h2>
 
-<h3>Tem certeza de que deseja excluir este Produto?</h3>
+<h3>Tem certeza de que deseja excluir esta venda?</h3>
 <div>
     <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-           @Html.DisplayFor(Model => Model.Data)
+            @Html.DisplayNameFor(Model => Model[0].Data)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Data)
+            @Html.DisplayFor(model => model[0].Data)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cliente)
+            @Html.DisplayNameFor(model => model[0].Cliente)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cliente)
+            @Html.DisplayFor(model => model[0].Cliente)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Total)
+            @Html.DisplayNameFor(model => model[0].Total)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Total)
+            @Html.DisplayFor(model => model[0].Total)
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    <table class="table table-striped table-bordered table-hover m-0">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Produto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ValorUnit)
+            </th>
+
+            @*<th></th>*@
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorUnit)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

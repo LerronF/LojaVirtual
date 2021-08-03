@@ -227,12 +227,60 @@ namespace LojaVirtual.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendas vendas = db.Vendas.Find(id);
-            if (vendas == null)
+            //Vendas vendas = db.Vendas.Find(id);
+
+            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
+
+            if (id == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(vendas);
+            //Vendas vendas = db.Vendas.Find(id);
+
+            List<Vendas> lista = new List<Vendas>();
+
+            using (SqlConnection conn = new SqlConnection(_connStr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = @"SELECT V.Id, V.Data,V.Cliente, Sum(VI.ValUnit) as Total,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd " +
+                                       "FROM Vendas V  " +
+                                       "inner join VendasItens VI ON V.Id = VI.Pedido " +
+                                       "inner join Produtos P on P.Id = VI.Produto " +
+                                       "where V.id = " + id + "" +
+                                       "Group by V.Id, V.Data,V.Cliente,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd";
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+
+                        Vendas venda = new Vendas();
+                        venda.ID = (int)reader["Id"];
+                        //venda.CodCli = (int)reader["CodCli"];
+                        venda.Cliente = (string)reader["Cliente"];
+                        venda.Data = (DateTime)reader["Data"];
+                        venda.Total = (decimal)reader["Total"];
+
+                        venda.Produto = (string)reader["Descricao"];
+                        venda.Quantidade = (int)reader["QuantProd"];
+                        venda.ValorUnit = (decimal)reader["ValUnit"];
+
+
+                        lista.Add(venda);
+                    }
+
+                    if (lista == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return View(lista);
         }
 
         // POST: Vendas/Delete
@@ -240,9 +288,36 @@ namespace LojaVirtual.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vendas vendas = db.Vendas.Find(id);
-            db.Vendas.Remove(vendas);
-            db.SaveChanges();
+            //Vendas vendas = db.Vendas.Find(id);
+            //db.Vendas.Remove(vendas);
+            //db.SaveChanges();
+
+            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
+
+            using (SqlConnection conn = new SqlConnection(_connStr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = @"delete from VendasItens where Pedido = " + id +
+                                       "delete from Vendas where Id = " + id;
+
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    catch (SqlException ex)
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+
+
             return RedirectToAction("Index");
         }
 
