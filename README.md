@@ -1,5 +1,5 @@
 # Loja-Transire
-O projeto proposto é uma loja virtual fictícia, a loja faz um cadastro de produtos bem como suas operações de cadastro, edição,exclusão e detalhes.
+O projeto proposto é uma loja virtual fictícia, a loja faz venda, em seguida mostra detalhes e deleta a venda.
 
 # Das tecnologias usadas
 1 - Banco de dados usamos o Sql Server Management studio 2017.
