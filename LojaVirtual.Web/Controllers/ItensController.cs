@@ -13,17 +13,50 @@ namespace LojaVirtual.Web.Controllers
     public class ItensController : Controller
     {
         private LojaVirtualContext db = new LojaVirtualContext();
+        private List<VendasItens> listaVI = new List<VendasItens>();
+        string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
+
         public ActionResult ListarItens(int id = 0)
         {
             var lista = db.VendasItens.Where(x => x.Pedido == id);
+
+            string descricao = "";
+            using (SqlConnection conn = new SqlConnection(_connStr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = @"select VI.Pedido, VI.Produto, P.Descricao,VI.ValUnit,VI.QuantProd,VI.Id " +
+                                       "from VendasItens VI " +
+                                       "inner join Produtos P on P.Id = VI.Produto " +
+                                       "where VI.Pedido = " + id;
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        VendasItens vendaI = new VendasItens();
+                        vendaI.Id = (int)reader["Id"];
+                        vendaI.Pedido = (int)reader["Pedido"];
+                        vendaI.Produto = (int)reader["Produto"];
+                        vendaI.ProdutoDesc = (string)reader["Descricao"];
+                        vendaI.ValUnit = (decimal)reader["ValUnit"];
+                        vendaI.QuantProd = (int)reader["QuantProd"];
+
+                        listaVI.Add(vendaI);
+                    }
+
+                    conn.Close();
+                }
+            }
+            
             ViewBag.Pedido = id;
-            return PartialView(lista);
+
+            return PartialView(listaVI);
         }
 
         public ActionResult Create(VendasItens vendas)
         {
-            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
-
             int codigoV = 0;
             using (SqlConnection conn = new SqlConnection(_connStr))
             {

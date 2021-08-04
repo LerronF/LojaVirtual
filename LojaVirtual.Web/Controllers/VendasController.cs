@@ -14,29 +14,23 @@ namespace LojaVirtual.Web.Controllers
     public class VendasController : Controller
     {
         private LojaVirtualContext db = new LojaVirtualContext();
-
-        //public void abrirconexao()
-        //{
-        //    string strConn = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
-        //    connection = new SqlConnection(strConn);
-        //    connection.Open();
-        //}
+        private List<Vendas> lista = new List<Vendas>();
+        private string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
+       
         // GET: Vendas
         public ActionResult Index()
         {
-            //var list = db.Vendas.ToList();
-            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
+            string sql = @"SELECT V.Id, V.Data,V.Cliente, Sum(VI.ValUnit) as Total " +
+                                       "FROM Vendas V " +
+                                       "inner join VendasItens VI ON V.Id = VI.Pedido " +
+                                       "Group by V.Id, V.Data,V.Cliente";
 
-            List<Vendas> lista = new List<Vendas>();
             using (SqlConnection conn = new SqlConnection(_connStr))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = @"SELECT V.Id, V.Data,V.Cliente, Sum(VI.ValUnit) as Total " +
-                                       "FROM Vendas V " +
-                                       "inner join VendasItens VI ON V.Id = VI.Pedido " +
-                                       "Group by V.Id, V.Data,V.Cliente";
+                    cmd.CommandText = sql;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -62,15 +56,11 @@ namespace LojaVirtual.Web.Controllers
         // GET: Vendas/Details
         public ActionResult Details(int? id)
         {
-            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Vendas vendas = db.Vendas.Find(id);
-
-            List<Vendas> lista = new List<Vendas>();
 
             using (SqlConnection conn = new SqlConnection(_connStr))
             {
@@ -88,7 +78,6 @@ namespace LojaVirtual.Web.Controllers
 
                     while (reader.Read())
                     {
-
                         Vendas venda = new Vendas();
                         venda.ID = (int)reader["Id"];
                         //venda.CodCli = (int)reader["CodCli"];
@@ -99,7 +88,6 @@ namespace LojaVirtual.Web.Controllers
                         venda.Produto = (string)reader["Descricao"];
                         venda.Quantidade = (int)reader["QuantProd"];
                         venda.ValorUnit = (decimal)reader["ValUnit"];
-
 
                         lista.Add(venda);
                     }
@@ -120,9 +108,6 @@ namespace LojaVirtual.Web.Controllers
         public ActionResult Create()
         {
             Vendas vendas = new Vendas();
-
-            //CarregarListas(vendas);
-
             return View(vendas);
         }
 
@@ -133,40 +118,32 @@ namespace LojaVirtual.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Vendas vendas)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    vendas.Data = DateTime.Now;
-            //    vendas.CodCli = 1;
-            //    vendas.Produto = "";
-            //    vendas.Quantidade = 0;
-            //    vendas.ValorUnit = 0;
-            //    vendas.Total = 0;
-            //    db.Vendas.Add(vendas);
-            //    db.SaveChanges();
-            //}
-            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
-
+            string clidesc = "";
             using (SqlConnection conn = new SqlConnection(_connStr))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = @"insert into Vendas (CodCli,Data,Total,Cliente) " +
-                               "values(1,GETDATE(),0,'" + vendas.Cliente + "')";
+                    cmd.CommandText = @"select Nome from Clientes where Id = " + vendas.Cliente;
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-
-                    try
+                    while (reader.Read())
                     {
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
+                        clidesc = (string)reader["Nome"];
                     }
-                    catch (SqlException ex)
-                    {
-                        conn.Close();
-                    }                    
-                }                
+
+                    conn.Close();
+                }
             }
+
+            vendas.CodCli = Convert.ToInt32(vendas.Cliente);
+            vendas.Cliente = clidesc;
+
+            string sql = @"insert into Vendas (CodCli,Data,Total,Cliente) " +
+                               "values(" + vendas.CodCli + ",GETDATE(),0,'" + vendas.Cliente + "')";
+            MethodCRUD(sql);
+
             int codigoV = 0;
             using (SqlConnection conn = new SqlConnection(_connStr))
             {
@@ -196,11 +173,14 @@ namespace LojaVirtual.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Vendas vendas = db.Vendas.Find(id);
+            
             if (vendas == null)
             {
                 return HttpNotFound();
             }
+
             return View(vendas);
         }
 
@@ -222,40 +202,31 @@ namespace LojaVirtual.Web.Controllers
 
         // GET: Vendas/Delete
         public ActionResult Delete(int? id)
-        {
+        {            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Vendas vendas = db.Vendas.Find(id);
 
-            string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //Vendas vendas = db.Vendas.Find(id);
-
-            List<Vendas> lista = new List<Vendas>();
+            string sql = @"SELECT V.Id, V.Data,V.Cliente, Sum(VI.ValUnit) as Total,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd " +
+                                       "FROM Vendas V  " +
+                                       "inner join VendasItens VI ON V.Id = VI.Pedido " +
+                                       "inner join Produtos P on P.Id = VI.Produto " +
+                                       "where V.id = " + id + "" +
+                                       "Group by V.Id, V.Data,V.Cliente,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd";
 
             using (SqlConnection conn = new SqlConnection(_connStr))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = @"SELECT V.Id, V.Data,V.Cliente, Sum(VI.ValUnit) as Total,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd " +
-                                       "FROM Vendas V  " +
-                                       "inner join VendasItens VI ON V.Id = VI.Pedido " +
-                                       "inner join Produtos P on P.Id = VI.Produto " +
-                                       "where V.id = " + id + "" +
-                                       "Group by V.Id, V.Data,V.Cliente,VI.Produto,P.Descricao,VI.ValUnit,VI.QuantProd";
+                    cmd.CommandText = sql;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-
                         Vendas venda = new Vendas();
                         venda.ID = (int)reader["Id"];
                         //venda.CodCli = (int)reader["CodCli"];
@@ -266,7 +237,6 @@ namespace LojaVirtual.Web.Controllers
                         venda.Produto = (string)reader["Descricao"];
                         venda.Quantidade = (int)reader["QuantProd"];
                         venda.ValorUnit = (decimal)reader["ValUnit"];
-
 
                         lista.Add(venda);
                     }
@@ -292,6 +262,16 @@ namespace LojaVirtual.Web.Controllers
             //db.Vendas.Remove(vendas);
             //db.SaveChanges();
 
+
+            string sql = @"delete from VendasItens where Pedido = " + id +
+                         " delete from Vendas where Id = " + id;
+            MethodCRUD(sql);
+
+            return RedirectToAction("Index");
+        }
+
+        private static void MethodCRUD(string sql)
+        {
             string _connStr = "Data Source=ITRIAD00307;Initial Catalog=BDTransire;Integrated Security=True";
 
             using (SqlConnection conn = new SqlConnection(_connStr))
@@ -299,9 +279,7 @@ namespace LojaVirtual.Web.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = @"delete from VendasItens where Pedido = " + id +
-                                       "delete from Vendas where Id = " + id;
-
+                    cmd.CommandText = sql;
 
                     try
                     {
@@ -315,7 +293,6 @@ namespace LojaVirtual.Web.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

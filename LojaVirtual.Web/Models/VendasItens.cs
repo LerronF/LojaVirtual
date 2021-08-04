@@ -11,6 +11,8 @@ namespace LojaVirtual.Web.Models
         public int Pedido { get; set; }        
         public int Produto { get; set; }
         public int? QuantProd { get; set; }
-        public decimal? ValUnit { get; set; }      
+        public decimal? ValUnit { get; set; }
+
+        public string ProdutoDesc { get; set; }
     }
 }
