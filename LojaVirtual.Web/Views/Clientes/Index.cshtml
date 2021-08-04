@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LojaVirtual.Web.Models.Clientes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Clientes</h2>
+
+<p>
+    @Html.ActionLink("Adicionar", "Create", "Clientes", null, new { @class = "btn btn-primary btn-lg" })
+</p>
+<div class="form-group mb-0">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover m-0">
+            <thead class="thead-themed">
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Editar", "Edit", "Clientes", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })
+                            @Html.ActionLink("Detalhes", "Details", "Clientes", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Deletar", "Delete", "Clientes", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
