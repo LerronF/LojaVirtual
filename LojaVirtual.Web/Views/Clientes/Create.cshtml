@@ -1,10 +1,15 @@
 ﻿@model LojaVirtual.Web.Models.Clientes
 
+@{
+    ViewBag.Title = "Create";
+}
 
-@using (Html.BeginForm()) 
+<h2>Preencha as Informações</h2>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Clientes</h4>
         <hr />
