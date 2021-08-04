@@ -35,7 +35,8 @@ namespace LojaVirtual.Web.Controllers
         // GET: Produto/Create
         public ActionResult Create()
         {
-            return View();
+            Produtos produto = new Produtos();
+            return View(produto);
         }
 
         // POST: Produto/Create

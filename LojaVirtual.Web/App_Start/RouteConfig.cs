@@ -19,11 +19,11 @@ namespace LojaVirtual.Web
                 defaults: new { controller = "Vendas", action = "Index", id = UrlParameter.Optional }
             );
 
-            //routes.MapRoute(
-            //    name: "Produto",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Produto", action = "Index", id = UrlParameter.Optional }
-            //);
+            routes.MapRoute(
+                name: "Produto",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Produto", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
